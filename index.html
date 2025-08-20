@@ -1,0 +1,2015 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Retail Branding </title>
+
+  <!-- Poppins + Tailwind -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css">
+<script src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Poppins', 'system-ui'] }
+        }
+      }
+    }
+  </script>
+
+</head>
+
+<body class="relative font-sans overflow-x-hidden">
+
+  <!-- overlay, блюрит фон при открытом меню -->
+  <div id="overlay" class="fixed inset-0 bg-black/50 backdrop-blur-sm hidden z-40"></div>
+
+  <!-- мобильное меню -->
+  <aside id="mobileMenu" class="fixed inset-y-0 right-0
+         w-[88%] sm:w-[60%] md:w-[45%] lg:w-[35%]
+         bg-black text-white z-50
+         translate-x-full transition-transform duration-300 ease-out
+         pt-24 overflow-y-auto">
+
+    <!-- закрыть -->
+    <button id="closeMenu"
+      class="absolute top-5 right-6 text-3xl leading-none transition-transform duration-500 hover:rotate-180">✕</button>
+
+    <!-- контент -->
+    <div class="min-h-full flex flex-col items-center px-8 space-y-6">
+
+      <!-- НАЧАЛО -->
+      <a href="#home" class="w-full max-w-xs mx-auto flex items-center justify-between py-2 text-xl">
+        <span class="text-yellow-400 tracking-wide">НАЧАЛО</span>
+        <span class="opacity-0 select-none">▾</span>
+      </a>
+
+      <!-- ВЫСТУПЛЕНИЯ -->
+      <a href="#services" class="w-full max-w-xs mx-auto flex items-center justify-between py-2 text-xl">
+        <span class="tracking-wide">ВЫСТУПЛЕНИЯ</span>
+        <span class="opacity-0 select-none">▾</span>
+      </a>
+
+      <!-- ССЫЛКИ -->
+      <a href="#news" class="w-full max-w-xs mx-auto flex items-center justify-between py-2 text-xl">
+        <span class="tracking-wide">ССЫЛКИ</span>
+        <span class="opacity-0 select-none">▾</span>
+      </a>
+
+      <!-- О НАС (аккордеон) -->
+      <div class="w-full max-w-xs mx-auto">
+        <button class="accordion-toggle w-full flex items-center justify-between py-2 text-xl">
+          <span class="tracking-wide">О НАС</span>
+          <span class="chev transition-transform">▾</span>
+        </button>
+        <div class="accordion-panel grid gap-3 pl-6 pt-2 pb-4 text-gray-400 text-lg hidden">
+          <a href="#firma" class="hover:text-white">Компания</a>
+          <a href="#usp" class="hover:text-white">Уникальное предложение</a>
+          <a href="#team" class="hover:text-white">Команда</a>
+          <a href="#standort" class="hover:text-white">Местоположение</a>
+          <a href="#kontakt" class="hover:text-white">Контакты</a>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- бренд внизу -->
+    <div class="absolute bottom-10 inset-x-0 flex justify-center">
+      <div class="text-2xl tracking-[0.35em] uppercase opacity-80 select-none">
+        retail|atelier
+      </div>
+    </div>
+  </aside>
+
+  <!-- весь остальной сайт -->
+  <div id="siteWrapper" class="flex flex-col min-h-screen">
+
+    <!-- header -->
+    <header
+      class="fixed top-0 w-full z-30 transition-all duration-300 ease-out will-change-transform will-change-opacity">
+      <!-- единый контейнер: одинаковый “поляк” px-8 -->
+      <div class="max-w-6xl mx-auto h-20 flex items-center justify-between px-8">
+        <!-- <img src="assets/logo.png" alt="Retail Branding" class="h-8"> -->
+        <img src="https://logo.svgcdn.com/l/jruby.svg" alt="Retail Branding" class="h-8">
+
+        <!-- десктоп-навигация -->
+        <nav class="hidden lg:flex space-x-10 text-gray-800">
+          <a href="#home" class="hover:text-yellow-500">ГЛАВНАЯ</a>
+          <a href="#services" class="hover:text-yellow-500">УСЛУГИ</a>
+          <a href="#news" class="hover:text-yellow-500">Новости</a>
+          <a href="#about" class="hover:text-yellow-500">О НАС</a>
+        </nav>
+
+        <!-- единственная бургер-кнопка -->
+        <button id="burger" class="text-3xl text-gray-800 p-2">
+          &#9776;
+        </button>
+      </div>
+    </header>
+
+    <!-- hero -->
+    <section id="home" class="relative pt-20 min-h-[95vh] bg-center bg-cover"
+      style="background-image:url('./img/img1.png')">
+      <div class="absolute inset-0 bg-black/30"></div>
+      <h1 id="heroTitle"
+        class="absolute bottom-6 left-0 px-4 lg:px-20 text-white font-extrabold leading-none
+         text-[15vw] lg:text-[12vw] whitespace-pre-line transition-transform duration-150 will-change-transform will-change-opacity">
+        АРЕНДА<br>ПЛОЩАДЕЙ
+      </h1>
+    </section>
+
+
+    <!-- NEWS-ticker под хедером -->
+    <!-- TICKER -->
+    <div id="newsTicker" class="w-full bg-black text-white overflow-hidden">
+      <!-- слой с градиентной маской по краям и hover-паузой -->
+      <div class="group h-16 flex items-center
+              [mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)]">
+        <!-- ТРЕК: 2 одинаковых набора подряд => 200% ширины; едем от 0 до -50% -->
+        <div class="ticker-track flex items-center whitespace-nowrap
+                animate-[ticker_24s_linear_infinite]
+                group-hover:[animation-play-state:paused]">
+
+          <!-- ===== НАБОР #1 (любой список элементов) ===== -->
+          <div class="flex-none flex items-center gap-6 px-8">
+            <span class="opacity-80 text-lg">20:15 • ORF 1</span>
+            <span class="inline-flex items-center gap-1">
+              <span class="w-3 h-3 rounded-full bg-lime-400"></span>
+              <span class="w-3 h-3 rounded-full bg-lime-400"></span>
+              <span class="w-3 h-3 rounded-full bg-lime-400"></span>
+            </span>
+            <span class="font-semibold text-lg">
+              НОВОСТИ: Арндт Трайндль — о соблазнении в розничной торговле — 15.01.2025, 20:15 | ORF 1
+            </span>
+          </div>
+
+          <!-- можно добавлять ещё элементы набора -->
+          <div class="flex-none flex items-center gap-6 px-8">
+            <span class="opacity-80 text-lg">21:00 • ORF 2</span>
+            <span class="inline-flex items-center gap-1">
+              <span class="w-3 h-3 rounded-full bg-lime-400"></span>
+              <span class="w-3 h-3 rounded-full bg-lime-400"></span>
+              <span class="w-3 h-3 rounded-full bg-lime-400"></span>
+            </span>
+            <span class="font-semibold text-lg">
+              Аналитика: тренды ритейла и брендинга — прямой эфир
+            </span>
+          </div>
+
+          <!-- ===== НАБОР #2 (ПОЛНЫЙ ДУБЛЬ для бесшовности) ===== -->
+          <div class="flex-none flex items-center gap-6 px-8">
+            <span class="opacity-80 text-lg">20:15 • ORF 1</span>
+            <span class="inline-flex items-center gap-1">
+              <span class="w-3 h-3 rounded-full bg-lime-400"></span>
+              <span class="w-3 h-3 rounded-full bg-lime-400"></span>
+              <span class="w-3 h-3 rounded-full bg-lime-400"></span>
+            </span>
+            <span class="font-semibold text-lg">
+              НОВОСТИ: Арндт Трайндль — о соблазнении в розничной торговле — 15.01.2025, 20:15 | ORF 1
+            </span>
+          </div>
+
+          <div class="flex-none flex items-center gap-6 px-8">
+            <span class="opacity-80 text-lg">21:00 • ORF 2</span>
+            <span class="inline-flex items-center gap-1">
+              <span class="w-3 h-3 rounded-full bg-lime-400"></span>
+              <span class="w-3 h-3 rounded-full bg-lime-400"></span>
+              <span class="w-3 h-3 rounded-full bg-lime-400"></span>
+            </span>
+            <span class="font-semibold text-lg">
+              Аналитика: тренды ритейла и брендинга — прямой эфир
+            </span>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <style>
+      /* ключ: внутри .ticker-track два одинаковых набора -> 200% контента.
+   едем от 0 до -50% — бесконечно и без швов */
+      @keyframes ticker {
+        from {
+          transform: translateX(0);
+        }
+
+        to {
+          transform: translateX(-50%);
+        }
+      }
+
+      /* убираем горизонтальный скролл на всякий случай */
+      html,
+      body {
+        overflow-x: hidden;
+      }
+    </style>
+
+
+
+    <!-- HERO с большим заголовком -->
+    <section class="relative bg-black text-white py-24 sm:py-28 md:py-36">
+      <div class="mx-auto max-w-7xl px-4">
+        <h2 class="font-extrabold leading-[0.95] tracking-tight
+           text-[12vw] sm:text-[10vw] md:text-[8vw] lg:text-[6.5vw]">
+          СОЗДАЕМ
+          <span class="paint-word text-white "
+            style="--paint:#a3e635; --p:0%; background-image:linear-gradient(90deg,var(--paint) var(--p),white var(--p)); -webkit-background-clip:text; background-clip:text; color:transparent;">
+            ВДОХНОВЛЯЮЩИЕ
+          </span><br class="hidden sm:block">
+          ПРОСТРАНСТВА&nbsp;ВМЕСТЕ
+        </h2>
+      </div>
+    </section>
+
+    <style>
+      /* общий класс для закраски текста */
+      .paint-word {
+        color: transparent;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        -webkit-background-clip: text;
+
+        /* настраиваемые переменные */
+        --paint: #a3e635;
+        /* цвет заливки */
+        --dir: 90deg;
+        /* направление градиента */
+        --p: 0%;
+        /* прогресс 0..100% */
+
+        background-image: linear-gradient(var(--dir),
+            var(--paint) 0 var(--p),
+            currentColor var(--p) 100%);
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .paint-word {
+          background-image: none;
+          color: var(--paint);
+          -webkit-text-fill-color: var(--paint);
+        }
+      }
+    </style>
+
+
+    <!-- ============================================================================================================================================================== -->
+
+    <section id="special-slider" class="bg-black ">
+      <div class="mx-auto w-full">
+        <div class="relative overflow-hidden">
+          <!-- полотно -->
+          <div id="ssTrack" class="flex transition-transform duration-500 ease-out will-change-transform"></div>
+
+
+
+
+
+          <div class="absolute inset-0 grid md:grid-cols-2 pointer-events-none z-10">
+            <div class="relative">
+              <div class="absolute top-4 right-4 flex gap-3 pointer-events-auto">
+                <button id="ssPrev" aria-label="Предыдущий слайд" class="ss-btn w-11 h-11 rounded-full bg-white/85 text-black shadow-md ring-1 ring-black/10 backdrop-blur
+               flex items-center justify-center transition hover:bg-black hover:text-white hover:ring-white/20
+               active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime-400">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                    <path d="M15.5 12H6.5M10 8.5L6.5 12l3.5 3.5" stroke="currentColor" stroke-width="1.8"
+                      stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+
+
+
+
+                </button>
+
+                <button id="ssNext" aria-label="Следующий слайд" class="ss-btn w-11 h-11 rounded-full bg-white/85 text-black shadow-md ring-1 ring-black/10 backdrop-blur
+               flex items-center justify-center transition hover:bg-black hover:text-white hover:ring-white/20
+               active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime-400">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                    <path d="M8.5 12h9M14 8.5L17.5 12 14 15.5" stroke="currentColor" stroke-width="1.8"
+                      stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+
+
+
+
+                </button>
+              </div>
+            </div>
+            <div></div>
+          </div>
+
+
+
+
+
+
+
+        </div>
+      </div>
+    </section>
+
+    <section id="curtain-stack" class="relative isolate overflow-x-hidden">
+
+      <!-- Панель 1 -->
+
+      <section id="servicesPanel" class="relative w-screen bg-black text-white overflow-hidden h-screen">
+        <div class="mx-auto max-w-[1600px] px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-24">
+
+          <!-- Заголовок -->
+          <h2 id="servicesTitle" data-scale-on-scroll data-scale-max="0.12"
+    class="font-extrabold leading-[0.95] tracking-tight text-[12vw] sm:text-[9vw] lg:text-[6rem] text-center transition-transform duration-100 ease-out">
+  <span class="paint-word text-white"
+    style="--paint:#a3e635; --p:0%; background-image:linear-gradient(90deg,var(--paint) var(--p),white var(--p)); -webkit-background-clip:text; background-clip:text; color:transparent;">
+    УСЛУГИ</span> РОЗНИЧНОГО БРЕНДИНГА
+</h2>
+
+          <!-- Подзаголовок -->
+          <p class="mt-6 max-w-4xl text-center mx-auto text-base sm:text-lg lg:text-xl text-white/80">
+            Каждый проект уникален. Индивидуальный пакет услуг составляется таким образом, чтобы он
+            идеально соответствовал миссии, целям и желаемым результатам – для достижения оптимальных
+            результатов, превосходящих ожидания.
+          </p>
+
+          <!-- Линия на всю ширину -->
+          <div id="servicesLine" class="relative mt-10 mx-[calc(50%-50vw)] min-w-[100vw] border-t border-white/30">
+            <span id="servicesKnob"
+  class="absolute top-1/2 left-0 -translate-y-1/2 translate-x-[var(--x)] transform
+         w-1.5 h-4 bg-white/70 rounded pointer-events-none"
+  style="--x:0px"></span>
+          </div>
+
+          <!-- Иконки в одну строку -->
+          <div id="servicesRow"
+            class="relative z-10 mt-14 flex items-start justify-between gap-8 overflow-x-auto no-scrollbar h-[128px]">
+
+            <div class="serviceItem group flex flex-col items-center text-center min-w-[140px]
+            transition duration-300 ease-out cursor-pointer
+            hover:-translate-y-1 hover:[&>svg]:text-lime-400 hover:[&>div]:text-white hover:[&>div]:scale-105">
+              <svg class="w-16 h-16 mb-4 text-white/70 transition duration-300 ease-out" viewBox="0 0 48 48" fill="none" stroke="currentColor"
+                stroke-width="2">
+                <circle cx="24" cy="24" r="18" />
+                <circle cx="24" cy="24" r="8" />
+                <path d="M24 6v8M24 34v8M6 24h8M34 24h8" />
+              </svg>
+              <div class="text-lg font-semibold leading-tight text-white/70 transition duration-300 ease-out">Стратегия<br>дизайна</div>
+            </div>
+
+            <div class="serviceItem group flex flex-col items-center text-center min-w-[140px]
+            transition duration-300 ease-out cursor-pointer
+            hover:-translate-y-1 hover:[&>svg]:text-lime-400 hover:[&>div]:text-white hover:[&>div]:scale-105">
+              <svg class="w-16 h-16 mb-4 text-white/70 transition duration-300 ease-out" viewBox="0 0 48 48" fill="none" stroke="currentColor"
+                stroke-width="2">
+                <circle cx="24" cy="24" r="18" />
+                <path d="M12 24h24M24 12v24" />
+                <circle cx="24" cy="24" r="6" />
+              </svg>
+              <div class="text-lg font-semibold leading-tight text-white/70 transition duration-300 ease-out">Фирменный<br>дизайн</div>
+            </div>
+
+            <div class=" serviceItem group flex flex-col items-center text-center min-w-[140px]
+            transition duration-300 ease-out cursor-pointer
+            hover:-translate-y-1 hover:[&>svg]:text-lime-400 hover:[&>div]:text-white hover:[&>div]:scale-105">
+              <svg class="w-16 h-16 mb-4 text-white/70 transition duration-300 ease-out" viewBox="0 0 48 48" fill="none" stroke="currentColor"
+                stroke-width="2">
+                <rect x="8" y="12" width="32" height="24" rx="3" />
+                <path d="M24 12v24M8 24h32" />
+              </svg>
+              <div class="text-lg font-semibold leading-tight text-white/70 transition duration-300 ease-out">Планирование<br>помещений</div>
+            </div>
+
+            <div class="serviceItem group flex flex-col items-center text-center min-w-[140px]
+            transition duration-300 ease-out cursor-pointer
+            hover:-translate-y-1 hover:[&>svg]:text-lime-400 hover:[&>div]:text-white hover:[&>div]:scale-105">
+              <svg class="w-16 h-16 mb-4 text-white/70 transition duration-300 ease-out" viewBox="0 0 48 48" fill="none" stroke="currentColor"
+                stroke-width="2">
+                <rect x="10" y="16" width="28" height="18" rx="3" />
+                <path d="M16 16v-4h16v4M16 34v4h16v-4" />
+              </svg>
+              <div class="text-lg font-semibold leading-tight text-white/70 transition duration-300 ease-out">Дизайн<br>помещения</div>
+            </div>
+
+            <div class="serviceItem group flex flex-col items-center text-center min-w-[140px]
+            transition duration-300 ease-out cursor-pointer
+            hover:-translate-y-1 hover:[&>svg]:text-lime-400 hover:[&>div]:text-white hover:[&>div]:scale-105">
+              <svg class="w-16 h-16 mb-4 text-white/70 transition duration-300 ease-out" viewBox="0 0 48 48" fill="none" stroke="currentColor"
+                stroke-width="2">
+                <rect x="8" y="14" width="12" height="20" rx="2" />
+                <rect x="28" y="14" width="12" height="20" rx="2" />
+              </svg>
+              <div class="text-lg font-semibold leading-tight text-white/70 transition duration-300 ease-out">Дизайн мебели /<br>оборудования</div>
+            </div>
+
+            <div class="serviceItem group flex flex-col items-center text-center min-w-[140px]
+            transition duration-300 ease-out cursor-pointer
+            hover:-translate-y-1 hover:[&>svg]:text-lime-400 hover:[&>div]:text-white hover:[&>div]:scale-105">
+              <svg class="w-16 h-16 mb-4 text-white/70 transition duration-300 ease-out" viewBox="0 0 48 48" fill="none" stroke="currentColor"
+                stroke-width="2">
+                <path d="M8 36l6-16 8 6 12-14 6 12" />
+                <circle cx="8" cy="36" r="2" />
+                <circle cx="14" cy="20" r="2" />
+                <circle cx="22" cy="26" r="2" />
+                <circle cx="34" cy="12" r="2" />
+                <circle cx="40" cy="24" r="2" />
+              </svg>
+              <div class="text-lg font-semibold leading-tight text-white/70 transition duration-300 ease-out">Реализация и/<br>или надзор</div>
+            </div>
+
+          </div>
+
+        </div>
+      </section>
+
+      <script>
+function StepScroller(cfg){
+  const $  = s => typeof s === 'string' ? document.querySelector(s) : s;
+  const $$ = s => typeof s === 'string' ? document.querySelectorAll(s) : s;
+
+  const section = $(cfg.section);
+  const items   = Array.from($$(cfg.items));      // карточки-«лампочки»
+  const line    = $(cfg.line);
+  const knob    = $(cfg.knob);
+  const snapEase = cfg.snapEase ?? 0.35;
+
+  if (!section || !items.length || !line || !knob) return;
+
+  // Найдём иконку и подпись внутри каждой карточки заранее
+  const parts = items.map(el => ({
+    el,
+    svg: el.querySelector('svg'),
+    title: el.querySelector('div')
+  }));
+
+  let centers=[], lineLeft=0, lineWidth=0, raf=null, lastX=0, lastSnap=-1;
+
+  function measure(){
+    const lr = line.getBoundingClientRect();
+    lineLeft  = lr.left + window.scrollX;
+    lineWidth = lr.width;
+
+    centers = items.map(el=>{
+      const r = el.getBoundingClientRect();
+      const cx = r.left + r.width/2 + window.scrollX;
+      return Math.min(lineLeft+lineWidth, Math.max(lineLeft, cx));
+    });
+  }
+
+  // прогресс: двигаем ползунок, пока линия проходит от 85% до 15% высоты вьюпорта
+  function sectionProgress(){
+    const vh   = window.innerHeight;
+    const rect = line.getBoundingClientRect();
+    const startPx = vh * 0.85;
+    const endPx   = vh * 0.15;
+    const t = (startPx - rect.top) / (startPx - endPx);
+    return Math.max(0, Math.min(1, t));
+  }
+
+  function applyLights(idxSnap){
+    // всё, что слева/включая текущую — «горит», остальное — «тускло»
+    parts.forEach((p, i) => {
+      const on = i <= idxSnap;
+      // SVG
+      if (p.svg){
+        p.svg.classList.toggle('text-lime-400', on);
+        p.svg.classList.toggle('text-white/70', !on);
+        p.svg.classList.add('transition', 'duration-300', 'ease-out');
+      }
+      // подпись
+      if (p.title){
+        p.title.classList.toggle('text-white', on);
+        p.title.classList.toggle('text-white/70', !on);
+        p.title.classList.toggle('scale-105', on);
+        p.title.classList.add('transition', 'duration-300', 'ease-out', 'origin-center');
+      }
+      // лёгкий «подъём» всей карточки
+      // p.el.classList.toggle('-translate-y-1', on);
+      p.el.classList.toggle('active', on);
+      p.el.classList.add('transition', 'duration-300', 'ease-out');
+    });
+  }
+
+  function render(){
+    const n = centers.length;
+    if (n < 2) { raf=null; return; }
+
+    const p = sectionProgress();
+    const idxFloat = p * (n - 1);
+    const idxSnap  = Math.round(idxFloat);
+    const targetX  = centers[idxSnap] - lineLeft;
+
+    lastX = lastX + (targetX - lastX) * snapEase;
+    knob.style.setProperty('--x', lastX + 'px');
+
+    // если «ступень» сменилась — щёлкнем «лампочки»
+    if (idxSnap !== lastSnap){
+      lastSnap = idxSnap;
+      applyLights(idxSnap);
+    }
+
+    raf = null;
+  }
+
+  function onScroll(){ if (raf == null) raf = requestAnimationFrame(render); }
+
+  measure(); render();
+  window.addEventListener('scroll', onScroll, {passive:true});
+  window.addEventListener('resize', ()=>{ measure(); render(); });
+  window.addEventListener('load',   ()=>{ measure(); render(); });
+}
+
+// Инициализация
+StepScroller({
+  section : '#servicesPanel',
+  items   : '#servicesRow .serviceItem',
+  line    : '#servicesLine',
+  knob    : '#servicesKnob',
+  snapEase: 0.35
+});
+</script>
+
+
+
+
+
+<section id="spbFocus" class="relative w-screen min-h-[80vh] overflow-hidden bg-white">
+  <div class="mx-auto max-w-6xl px-6 py-16 md:py-24">
+
+    <!-- Заголовок масштабируется твоим скриптом -->
+    <h2 id="servicesTitle2" data-scale-on-scroll data-scale-max="0.12"
+        class="text-center font-extrabold leading-[0.95] tracking-tight
+               text-[clamp(28px,7.5vw,84px)]
+               transition-transform duration-100 ease-out will-change-transform">
+
+      <!-- Закрашиваемое слово -->
+      <span
+        class="paint-word block"
+        data-paint-trigger="#spbFocus"
+        style="--paint:#a3e635; --base:#000; --p:0%;
+               background-image:linear-gradient(90deg,var(--paint) var(--p), var(--base) var(--p));
+               -webkit-background-clip:text; background-clip:text; color:transparent;">
+        Мировые подходы,
+      </span>
+
+      <span class="block text-black">петербургская реализация</span>
+    </h2>
+
+    <p class="mt-8 max-w-4xl mx-auto text-lg md:text-xl text-black/80 text-center">
+      Мы работаем в Санкт-Петербурге и глубоко понимаем местную среду:
+      градостроительные ограничения, архитектурный контекст, сезонные потоки
+      посетителей и поведение покупателей в разных районах. Этот опыт позволяет
+      адаптировать лучшие практики ритейла под условия города и делать решения,
+      которые работают здесь и сейчас.
+    </p>
+
+    <!-- Контент: слева цифры, справа изображение -->
+    <div class="mt-8 md:mt-12 grid md:grid-cols-2 gap-10 md:items-stretch">
+      <!-- КАРТОЧКИ С ЦИФРАМИ (лево) -->
+<div id="spbStats" class="flex flex-col gap-10 items-start">
+  <div class="statCard w-[min(92%,480px)] text-left">
+    <div class="text-[64px] md:text-[88px] leading-none font-bold text-lime-400">300+</div>
+    <div class="mt-2 text-xl md:text-2xl text-black">Клиентов / Арендаторов</div>
+    <hr class="mt-6 w-[360px] max-w-full border-black/70 ml-0">
+  </div>
+
+  <div class="statCard w-[min(92%,480px)] text-left">
+    <div class="text-[64px] md:text-[88px] leading-none font-bold text-lime-400">40</div>
+    <div class="mt-2 text-xl md:text-2xl text-black">Направлений бизнесов</div>
+    <hr class="mt-6 w-[360px] max-w-full border-black/70 ml-0">
+  </div>
+
+  <div class="statCard w-[min(92%,480px)] text-left">
+    <div class="text-[64px] md:text-[88px] leading-none font-bold text-lime-400">5</div>
+    <div class="mt-2 text-xl md:text-2xl text-black">Площадок</div>
+    <hr class="mt-6 w-[360px] max-w-full border-black/70 ml-0">
+  </div>
+</div>
+
+
+<!-- ПРАВАЯ КОЛОНКА: карта + метки (масштаб на группе) -->
+<div class="relative md:h-full flex items-center justify-center">
+  <div id="spbMapBox" class="relative inline-block select-none">
+    <div id="spbMapGroup"
+         data-shrink-on-scroll
+         data-scale-start="1.85"   
+         data-scale-end="1.00"     
+         data-scale-trigger="#spbFocus"
+         class="relative inline-block origin-center">
+      <img id="spbMap"
+     src="img/transparent-Photoroom.png"
+     alt="Карта Санкт-Петербурга"
+     class="block w-auto max-w-[min(80vw,520px)] h-auto pointer-events-none select-none z-0" />
+
+      <!-- Метки: проценты по карте + названия -->
+      <span class="map-pin pin--marker" data-x="68" data-y="28" data-title="Невский проспект"><i></i></span>
+<span class="map-pin pin--marker" data-x="56" data-y="46" data-title="Морской вокзал"><i></i></span>
+<span class="map-pin pin--marker" data-x="74" data-y="64" data-title="Лахта Центр"><i></i></span>
+    </div>
+  </div>
+</div>
+
+    </div>
+
+  </div>
+</section>
+
+<style>
+/* ====== SIMPLE REAL-ESTATE PIN ====== */
+#spbMapGroup{
+  /* быстро настраиваем цвета/размеры под бренд */
+  --pin-fill: #fa0505;      /* цвет пина */
+  --pin-ring: #fff;      /* кант */
+  --pin-size: 12px;      /* диаметр точки */
+  --pin-shadow: 0 6px 14px rgba(0,0,0,.22);
+  --label-bg: #111;
+  --label-fg: #fff;
+}
+
+/* базовый вид: маленькая точка с кантом */
+.map-pin{
+  position:absolute; left:0; top:0;
+  width:var(--pin-size); height:var(--pin-size);
+  border-radius:9999px;
+  background:var(--pin-fill);
+  box-shadow: 0 0 0 2px var(--pin-ring), var(--pin-shadow);
+  transform: translate(-50%, -50%) scale(.9);
+  opacity:0;
+  will-change: transform, opacity;
+  pointer-events:none; /* включаем JS-ом, когда метка «доприлетела» */
+  cursor:pointer;
+  z-index:5;
+}
+
+
+.map-pin::after{ content:none; }
+
+/* компактный label по hover/focus (без агрессивной плашки) */
+.map-pin[data-title]::before{
+  content: attr(data-title);
+  position:absolute; left: calc(100% + 10px); top: 50%;
+  transform: translateY(-50%) scale(.98);
+  background: var(--label-bg);
+  color: var(--label-fg);
+  font:500 12px/1.2 Poppins, system-ui;
+  white-space: nowrap;
+  padding: 6px 8px;
+  border-radius: 8px;
+  box-shadow: 0 8px 18px rgba(0,0,0,.25);
+  opacity:0; pointer-events:none;
+  transition: opacity .16s ease-out, transform .16s ease-out;
+  z-index:10;
+}
+
+/* появление подписи */
+.map-pin:hover::before,
+.map-pin:focus-visible::before{
+  opacity:1; transform: translateY(-50%) scale(1);
+}
+
+/* заметный, но спокойный hover самого пина */
+.map-pin:hover,
+.map-pin:focus-visible{
+  transform: translate(-50%, -50%) scale(1.05);
+}
+
+/* respect reduced motion */
+@media (prefers-reduced-motion: reduce){
+  .map-pin{ transition:none; transform: translate(-50%,-50%) scale(1); opacity:1; }
+  .map-pin::before{ transition:none; }
+}
+
+
+</style>
+
+
+
+
+
+
+
+<style>
+  .statCard{
+    transform: translateX(-48px);
+    opacity: 0;
+    transition: transform .7s cubic-bezier(.22,.9,.22,1), opacity .7s ease-out;
+    will-change: transform, opacity;
+  }
+  .statCard.is-in{
+    transform: translateX(0);
+    opacity: 1;
+  }
+  @media (prefers-reduced-motion: reduce){
+    .statCard{ transform: none; opacity: 1; transition: none; }
+  }
+</style>
+
+<script>
+(() => {
+  const group   = document.querySelector('#spbMapGroup');
+  if (!group) return;
+
+  const pins = Array.from(group.querySelectorAll('.map-pin'));
+  // координаты + a11y
+  pins.forEach(pin => {
+    pin.style.left = (parseFloat(pin.dataset.x || '50')) + '%';
+    pin.style.top  = (parseFloat(pin.dataset.y || '50')) + '%';
+    if (!pin.hasAttribute('tabindex')) pin.setAttribute('tabindex', '0');
+    if (pin.dataset.title && !pin.hasAttribute('aria-label')) pin.setAttribute('aria-label', pin.dataset.title);
+  });
+
+  // хелперы
+  const clamp  = (n,a,b)=>Math.min(b,Math.max(a,n));
+  const ease   = t => (t<=0?0:t>=1?1:t*t*(3-2*t)); // smoothstep
+
+  /**
+   * p — единый прогресс 0..1 от позиции карты на экране:
+   * когда центр карты между ~110% vh (ниже окна) и ~30% vh (выше центра) — p идёт 0→1.
+   * Это работает всегда и не зависит от чужих переменных.
+   */
+  function getProgress(){
+    const vh = window.innerHeight;
+    const r  = group.getBoundingClientRect();
+    const centerY = r.top + r.height/2;
+
+    const startPx = vh * 1.10;  // центр карты существенно ниже окна -> p=0
+    const endPx   = vh * 0.30;  // центр карты достаточно высоко -> p=1
+    const t = (startPx - centerY) / (startPx - endPx);
+    return clamp(t, 0, 1);
+  }
+
+  /**
+   * компенсируем масштаб родителя (если он есть), чтобы размер пинов не менялся
+   * читаем CSS-переменную, а если её нет — просто 1 (без компенсации)
+   */
+  function getInvScale(){
+    const css = getComputedStyle(group).getPropertyValue('--pin-invscale').trim();
+    const inv = Number.parseFloat(css);
+    return Number.isFinite(inv) ? inv : 1;
+  }
+
+  // Тайминг фаз (можно подкрутить):
+  // IN: 0.06..0.36 — подлёт
+  // DOCK: 0.36..0.64 — стоят на месте
+  // OUT: 0.64..0.94 — улёт
+const IN_START   = 0.06;
+const IN_END     = 0.36;
+// сколько «держим» метку в доке после прилёта
+const HOLD       = 0.24;   // ← увеличивай/уменьшай как нужно (0.20–0.35 обычно ок)
+// длительность самой фазы улёта (для плавности)
+const OUT_LEN    = 0.22;
+
+const STAGGER    = 0.08;   
+const DIST_PX    = 420;
+const SCALE_MIN  = 0.85;
+const SCALE_MAX  = 1.00;
+
+function motionParam(p, i){
+  const d  = i * STAGGER;
+  const s1 = IN_START + d;         
+  const s2 = IN_END   + d;         
+  const s3 = Math.min(s2 + HOLD, 0.98); 
+  const s4 = Math.min(s3 + OUT_LEN, 1.05); 
+
+  if (p <= s1) return 0;
+  if (p <  s2) return ease((p - s1)/(s2 - s1));       
+  if (p <= s3) return 1;                              
+  if (p <  s4) return 1 - ease((p - s3)/(s4 - s3));   
+  return 0;
+}
+
+  let raf=null;
+  function render(){
+    const p   = getProgress();
+    const inv = getInvScale();
+
+    pins.forEach((pin, i) => {
+      const x = parseFloat(pin.dataset.x || '50');
+      const y = parseFloat(pin.dataset.y || '50');
+
+      const dx = (x - 50) / 50;   // -1..1
+      const dy = (y - 50) / 50;
+
+      const m  = motionParam(p, i);                  // 0..1
+      const tx = (1 - m) * DIST_PX * dx;
+      const ty = (1 - m) * DIST_PX * dy;
+      const sc = (SCALE_MIN + (SCALE_MAX - SCALE_MIN) * m) * inv;
+
+      pin.style.transform      = `translate(calc(-50% + ${tx}px), calc(-50% + ${ty}px)) scale(${sc})`;
+      pin.style.opacity        = m;
+      pin.style.pointerEvents  = (m > 0.1) ? 'auto' : 'none';
+      // не будем прятать visibility, чтобы уж точно было видно даже при граничных значениях
+    });
+
+    raf=null;
+  }
+
+  const schedule = () => { if (!raf) raf = requestAnimationFrame(render); };
+
+  // события
+  window.addEventListener('scroll',  schedule, { passive:true });
+  window.addEventListener('resize',  schedule, { passive:true });
+  window.addEventListener('load',    schedule, { passive:true });
+
+  // на случай внешнего изменения стилей/скейла карты
+  const mo = new MutationObserver(schedule);
+  mo.observe(group, { attributes:true, attributeFilter:['style', 'class'] });
+
+  // первичный рендер
+  render();
+})();
+</script>
+
+
+
+
+
+
+
+
+<script>
+(() => {
+  const container = document.getElementById('spbStats');
+  if (!container) return;
+
+  const cards = Array.from(container.querySelectorAll('.statCard'));
+  if (!cards.length) return;
+
+  const STAGGER = 160; // мс между элементами
+
+  // трекаем направление скролла
+  let lastY = window.scrollY;
+  let scrollingDown = true;
+  let prevDir = true;
+
+  const showQueue = [];
+  const hideQueue = [];
+  const pendingShow = new Set();
+  const pendingHide = new Set();
+  let runningShow = false;
+  let runningHide = false;
+
+  function runShow() {
+    if (runningShow) return;
+    runningShow = true;
+    (function step() {
+      if (!showQueue.length) { runningShow = false; return; }
+      const el = showQueue.shift();
+      pendingShow.delete(el);
+      el.style.transitionDelay = '0ms';
+      el.classList.add('is-in');
+      setTimeout(step, STAGGER);
+    })();
+  }
+
+  function runHide() {
+    if (runningHide) return;
+    runningHide = true;
+    (function step() {
+      if (!hideQueue.length) { runningHide = false; return; }
+      const el = hideQueue.shift();
+      pendingHide.delete(el);
+      el.style.transitionDelay = '0ms';
+      el.classList.remove('is-in');
+      setTimeout(step, STAGGER);
+    })();
+  }
+
+  // смена направления — чистим противоположную очередь
+  window.addEventListener('scroll', () => {
+    const y = window.scrollY;
+    const dir = y > lastY;
+    if (dir !== prevDir) {
+      if (dir) { // вниз
+        hideQueue.length = 0; pendingHide.clear(); runningHide = false;
+      } else {   // вверх
+        showQueue.length = 0; pendingShow.clear(); runningShow = false;
+      }
+      prevDir = dir;
+    }
+    scrollingDown = dir;
+    lastY = y;
+  }, { passive: true });
+
+  // индексы для сортировки (DOM-порядок)
+  const idx = new Map(cards.map((el, i) => [el, i]));
+
+  const io = new IntersectionObserver((entries) => {
+    const toShow = [];
+    const toHide = [];
+
+    entries.forEach(entry => {
+      const el = entry.target;
+      const i = idx.get(el);
+
+      if (entry.isIntersecting && scrollingDown && !el.classList.contains('is-in')) {
+        toShow.push({ el, i });
+      } else if (!entry.isIntersecting && !scrollingDown && el.classList.contains('is-in')) {
+        toHide.push({ el, i });
+      }
+    });
+
+    // вниз — по возрастанию, вверх — по убыванию
+    toShow.sort((a, b) => a.i - b.i).forEach(({ el }) => {
+      if (!pendingShow.has(el)) { pendingShow.add(el); showQueue.push(el); }
+    });
+    toHide.sort((a, b) => b.i - a.i).forEach(({ el }) => {
+      if (!pendingHide.has(el)) { pendingHide.add(el); hideQueue.push(el); }
+    });
+
+    if (showQueue.length) runShow();
+    if (hideQueue.length) runHide();
+  }, {
+    threshold: 0.25,
+    rootMargin: '0px 0px -12% 0px' // можно поджать, если срабатывает слишком поздно
+  });
+
+  cards.forEach(c => io.observe(c));
+})();
+</script>
+
+
+<script>
+(() => {
+  const els = Array.from(document.querySelectorAll('[data-shrink-on-scroll]')).map(el => ({
+    el,
+    start: parseFloat(el.dataset.scaleStart) || 1.2,
+    end:   parseFloat(el.dataset.scaleEnd)   || 1,
+    trigger: document.querySelector(el.dataset.scaleTrigger) || el.closest('section') || document.body
+  }));
+  if (!els.length) return;
+
+  const clamp = (n,a,b)=>Math.min(b,Math.max(a,n));
+  let raf=null;
+
+  function update(){
+    const vh = window.innerHeight;
+    els.forEach(o => {
+      const r = o.trigger.getBoundingClientRect();
+      const startPx = vh * 1.10;
+      const endPx   = vh * 0.30;
+      const t = (startPx - r.top) / (startPx - endPx);
+      const p = clamp(t, 0, 1);           // общий прогресс секции
+      const s = o.start + (o.end - o.start) * p;
+
+      // сам масштаб
+      o.el.style.transform = `scale(${s})`;
+
+      // пробрасываем переменные для дочерних скриптов/стилей
+      o.el.style.setProperty('--p', String(p));                // 0..1
+      o.el.style.setProperty('--map-scale', String(s));        // фактический scale
+      o.el.style.setProperty('--pin-invscale', String(1/s));   // чтобы не «распухали» метки
+    });
+    raf=null;
+  }
+
+  const schedule = () => { if (!raf) raf = requestAnimationFrame(update); };
+  window.addEventListener('scroll', schedule, {passive:true});
+  window.addEventListener('resize', schedule, {passive:true});
+  update();
+})();
+</script>
+
+
+<!-- BRANDS SCROLLER (edge-to-edge) -->
+<section class="w-screen bg-white">
+  <!-- скрываем края плавной маской -->
+  <div class="group relative w-full overflow-hidden brands-fade">
+    <!-- трек: два одинаковых набора подряд = 200% контента -->
+    <ul class="brands-track flex items-center gap-16 py-8
+               whitespace-nowrap select-none will-change-transform
+               animate-[brands-scroll_28s_linear_infinite]
+               group-hover:[animation-play-state:paused]
+               group-focus-within:[animation-play-state:paused]">
+      <!-- Набор #1 -->
+      <li class="flex items-center gap-16 shrink-0">
+        <a href="#" class="block shrink-0">
+          <img src="img/ginza-Photoroom.png" alt="Brand 1"
+               class="h-12 md:h-16 lg:h-20 w-auto object-contain
+                      opacity-70 hover:opacity-100 transition hover:scale-110" />
+        </a>
+        <a href="#" class="block shrink-0">
+          <img src="img/ginza-Photoroom.png" alt="Brand 2"
+               class="h-12 md:h-16 lg:h-20 w-auto object-contain
+                      opacity-70 hover:opacity-100 transition hover:scale-110" />
+        </a>
+        <a href="#" class="block shrink-0">
+          <img src="img/ginza-Photoroom.png" alt="Brand 3"
+               class="h-12 md:h-16 lg:h-20 w-auto object-contain
+                      opacity-70 hover:opacity-100 transition hover:scale-110" />
+        </a>
+        <!-- добавь остальные бренды -->
+      </li>
+
+      <!-- Набор #2 (полный дубль для бесшовности) -->
+      <li aria-hidden="true" class="flex items-center gap-16 shrink-0">
+        <a href="#" class="block shrink-0"><img src="img/ginza-Photoroom.png" alt="" class="h-12 md:h-16 lg:h-20 w-auto object-contain opacity-70 transition hover:scale-110" /></a>
+        <a href="#" class="block shrink-0"><img src="img/ginza-Photoroom.png" alt="" class="h-12 md:h-16 lg:h-20 w-auto object-contain opacity-70 transition hover:scale-110" /></a>
+        <a href="#" class="block shrink-0"><img src="img/ginza-Photoroom.png" alt="" class="h-12 md:h-16 lg:h-20 w-auto object-contain opacity-70 transition hover:scale-110" /></a>
+        <a href="#" class="block shrink-0"><img src="img/ginza-Photoroom.png" alt="" class="h-12 md:h-16 lg:h-20 w-auto object-contain opacity-70 transition hover:scale-110" /></a>
+        <a href="#" class="block shrink-0"><img src="img/ginza-Photoroom.png" alt="" class="h-12 md:h-16 lg:h-20 w-auto object-contain opacity-70 transition hover:scale-110" /></a>
+        <a href="#" class="block shrink-0"><img src="img/ginza-Photoroom.png" alt="" class="h-12 md:h-16 lg:h-20 w-auto object-contain opacity-70 transition hover:scale-110" /></a>        <a href="#" class="block shrink-0"><img src="img/ginza-Photoroom.png" alt="" class="h-12 md:h-16 lg:h-20 w-auto object-contain opacity-70 transition hover:scale-110" /></a>
+        <a href="#" class="block shrink-0"><img src="img/ginza-Photoroom.png" alt="" class="h-12 md:h-16 lg:h-20 w-auto object-contain opacity-70 transition hover:scale-110" /></a>
+        <a href="#" class="block shrink-0"><img src="img/ginza-Photoroom.png" alt="" class="h-12 md:h-16 lg:h-20 w-auto object-contain opacity-70 transition hover:scale-110" /></a>        <a href="#" class="block shrink-0"><img src="img/ginza-Photoroom.png" alt="" class="h-12 md:h-16 lg:h-20 w-auto object-contain opacity-70 transition hover:scale-110" /></a>
+        <a href="#" class="block shrink-0"><img src="img/ginza-Photoroom.png" alt="" class="h-12 md:h-16 lg:h-20 w-auto object-contain opacity-70 transition hover:scale-110" /></a>
+        <a href="#" class="block shrink-0"><img src="img/ginza-Photoroom.png" alt="" class="h-12 md:h-16 lg:h-20 w-auto object-contain opacity-70 transition hover:scale-110" /></a>        <a href="#" class="block shrink-0"><img src="img/ginza-Photoroom.png" alt="" class="h-12 md:h-16 lg:h-20 w-auto object-contain opacity-70 transition hover:scale-110" /></a>
+        <a href="#" class="block shrink-0"><img src="img/ginza-Photoroom.png" alt="" class="h-12 md:h-16 lg:h-20 w-auto object-contain opacity-70 transition hover:scale-110" /></a>
+        <a href="#" class="block shrink-0"><img src="img/ginza-Photoroom.png" alt="" class="h-12 md:h-16 lg:h-20 w-auto object-contain opacity-70 transition hover:scale-110" /></a>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<style>
+/* мягкое затемнение краёв (работает и в Safari) */
+.brands-fade{
+  -webkit-mask-image:linear-gradient(to right,transparent,black 8%,black 92%,transparent);
+          mask-image:linear-gradient(to right,transparent,black 8%,black 92%,transparent);
+}
+/* трек = 200% контента. Едем от 0 до -50% — бесконечно и без швов */
+@keyframes brands-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+/* уважение к reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .brands-track { animation: none !important; }
+}
+</style>
+
+
+
+
+
+
+
+      <!-- Панель 3 (шторка) -->
+      <section class="relative w-screen h-screen overflow-hidden">
+        <div class="absolute inset-0 overflow-hidden [clip-path:inset(0)]">
+          <figure class="fixed inset-0 z-0 bg-white"></figure>
+        </div>
+        <div class="relative z-10 grid place-items-center h-full">
+          <h2 class="m-0 text-black font-extrabold text-[clamp(28px,8vw,72px)]">
+            Новая секция
+          </h2>
+        </div>
+      </section>
+
+
+
+    <!-- Обычный контент -->
+<section id="panoSection" class="relative mx-auto mb-24 px-4 py-8 max-w-[900px]">
+  <h2 id="panoTitle" data-scale-on-scroll data-scale-max="0.10"
+      class="text-center font-extrabold leading-[0.95] tracking-tight
+             text-[clamp(32px,5vw,56px)] mb-6 transition-transform duration-100 ease-out will-change-transform">
+    <span class="paint-word"
+          data-paint-trigger="#panoSection"
+          style="--paint:#a3e635; --base:#000; --p:0%;
+                 background-image:linear-gradient(90deg,var(--paint) var(--p), var(--base) var(--p));
+                 -webkit-background-clip:text; background-clip:text; color:transparent;">
+      Панорама&nbsp;360°
+    </span>
+    • Большая Нева
+  </h2>
+
+  <!-- контейнер под 360 -->
+  <div id="pano"
+       class="w-full h-[320px] sm:h-[380px] md:h-[460px] lg:h-[520px]
+              rounded-xl overflow-hidden ring-1 ring-black/10 bg-black"></div>
+
+  <!-- подпись (атрибуция CC BY-SA 4.0) -->
+  <!-- <p class="mt-4 text-sm text-black/60 text-center">
+    Фото: Wikimedia Commons, CC BY-SA 4.0 —
+    <a class="underline hover:no-underline" target="_blank" rel="noopener"
+       href="https://upload.wikimedia.org/wikipedia/commons/b/b6/%D0%A1%D0%B0%D0%BD%D0%BA%D1%82-%D0%9F%D0%B5%D1%82%D0%B5%D1%80%D0%B1%D1%83%D1%80%D0%B3%2C_%D0%91%D0%BE%D0%BB%D1%8C%D1%88%D0%B0%D1%8F_%D0%9D%D0%B5%D0%B2%D0%B0_%D0%BC%D0%B5%D0%B6%D0%B4%D1%83_%D0%B2%D0%B5%D1%80%D1%84%D1%8F%D0%BC%D0%B8_%D1%81%D1%84%D0%B5%D1%80%D0%BE%D0%BF%D0%B0%D0%BD%D0%BE%D1%80%D0%B0%D0%BC%D0%B0.jpg">
+      оригинал изображения
+    </a>
+  </p> -->
+</section>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const el = document.getElementById('pano');
+  if (!el || !window.pannellum) return;
+
+  /* Точечная метка без ссылки */
+  function rbHotspot(hotSpotDiv, args){
+  hotSpotDiv.classList.add('rb-spot');
+  hotSpotDiv.setAttribute('tabindex','0');
+
+  hotSpotDiv.innerHTML = `
+    <span class="rb-pin" aria-hidden="true"></span>
+    <div class="rb-card" role="dialog" aria-live="polite">
+      ${args.cardTitle ? `<div class="rb-card-title">${args.cardTitle}</div>` : ''}
+      <div class="rb-card-text">${args.cardText || args.text || ''}</div>
+    </div>
+  `;
+
+  // Для тач-устройств показываем по фокусу/тапу
+  hotSpotDiv.addEventListener('click', () => hotSpotDiv.classList.toggle('is-open'));
+  hotSpotDiv.addEventListener('blur',  () => hotSpotDiv.classList.remove('is-open'));
+}
+
+  /* «Полигон» — условная область с клипом и подписью */
+  function rbArea(hotSpotDiv, args){
+  hotSpotDiv.classList.add('rb-area-wrap');
+  hotSpotDiv.setAttribute('tabindex','0');
+
+  const area = document.createElement('div');
+  area.className = 'rb-area';
+  if (args.width)     area.style.width  = args.width + 'px';
+  if (args.height)    area.style.height = args.height + 'px';
+  if (args.clipPath)  area.style.clipPath = args.clipPath;
+
+  const card = document.createElement('div');
+  card.className = 'rb-card rb-card--area';
+  card.innerHTML = `
+    ${args.cardTitle ? `<div class="rb-card-title">${args.cardTitle}</div>` : ''}
+    <div class="rb-card-text">${args.cardText || args.text || ''}</div>
+  `;
+
+  hotSpotDiv.appendChild(area);
+  hotSpotDiv.appendChild(card);
+
+  // Тач: показать/скрыть карточку по тапу
+  hotSpotDiv.addEventListener('click', () => hotSpotDiv.classList.toggle('is-open'));
+  hotSpotDiv.addEventListener('blur',  () => hotSpotDiv.classList.remove('is-open'));
+}
+
+  const viewer = pannellum.viewer('pano', {
+    type: 'equirectangular',
+    crossOrigin: 'anonymous',
+    panorama: 'https://upload.wikimedia.org/wikipedia/commons/b/b6/%D0%A1%D0%B0%D0%BD%D0%BA%D1%82-%D0%9F%D0%B5%D1%82%D0%B5%D1%80%D0%B1%D1%83%D1%80%D0%B3%2C_%D0%91%D0%BE%D0%BB%D1%8C%D1%88%D0%B0%D1%8F_%D0%9D%D0%B5%D0%B2%D0%B0_%D0%BC%D0%B5%D0%B6%D0%B4%D1%83_%D0%B2%D0%B5%D1%80%D1%84%D1%8F%D0%BC%D0%B8_%D1%81%D1%84%D0%B5%D1%80%D0%BE%D0%BF%D0%B0%D0%BD%D0%BE%D1%80%D0%B0%D0%BC%D0%B0.jpg',
+    autoLoad: true,
+    showControls: true,
+    compass: true,
+    yaw: 0, pitch: 0, hfov: 100, minHfov: 60, maxHfov: 120,
+    mouseZoom: true,
+
+    /* Метки: без URL */
+    hotSpots: [
+  { yaw: 95, pitch: -4, createTooltipFunc: rbHotspot,
+    createTooltipArgs: { 
+      text: 'Набережная',
+      cardTitle: 'Набережная',
+      cardText: 'Прогулочная зона, доступ к воде, ориентир для навигации.'
+    } 
+  },
+
+  { yaw: 60, pitch: -2, createTooltipFunc: rbHotspot,
+    createTooltipArgs: { 
+      text: 'Мост',
+      cardTitle: 'Мост',
+      cardText: 'Транспортная артерия. Потоки пешеходов и автомобилей.'
+    } 
+  },
+
+  { yaw: -15, pitch: -3, createTooltipFunc: rbHotspot,
+    createTooltipArgs: { 
+      text: 'Верфи',
+      cardTitle: 'Верфи',
+      cardText: 'Промышленная зона, ограниченный доступ.'
+    } 
+  },
+
+  { yaw: 35, pitch: -6, scale: 1.0, createTooltipFunc: rbArea,
+    createTooltipArgs: {
+      text: 'Площадь застройки (пример)',
+      cardTitle: 'Площадь застройки',
+      cardText: 'Ориентировочно 2 500–3 000 м². Возможна фрагментация.',
+      width: 240, height: 150,
+      clipPath: 'polygon(10% 15%, 95% 10%, 88% 85%, 14% 90%)'
+    } 
+  }
+]
+
+  });
+
+  /* Клик по панораме — координаты в консоль, чтобы легко
+     подбирать yaw/pitch для новых меток / полигона. */
+  el.addEventListener('click', function () {
+    console.log('yaw:', viewer.getYaw().toFixed(1),
+                'pitch:', viewer.getPitch().toFixed(1));
+  });
+});
+</script>
+
+<style>
+  /* Базовый контейнер хотспота — уже есть */
+#pano .rb-spot{ position:absolute; cursor:pointer; outline:none; }
+
+/* Стеклянная карточка (общая) */
+#pano .rb-card{
+  position: absolute;
+  left: 22px;               /* правее пина */
+  top: 50%;
+  transform: translateY(-50%) translateZ(0) scale(.98);
+  max-width: min(52vw, 280px);
+  padding: 10px 12px;
+  border-radius: 14px;
+
+  /* стеклянное белое */
+  background: rgba(255,255,255,.58);
+  -webkit-backdrop-filter: blur(10px) saturate(140%);
+  backdrop-filter: blur(10px) saturate(140%);
+  border: 1px solid rgba(255,255,255,.70);
+  box-shadow:
+    0 6px 18px rgba(0,0,0,.18),
+    inset 0 1px 0 rgba(255,255,255,.65);
+
+  color: #0b0b0b;
+  font: 500 12px/1.35 Poppins, system-ui;
+
+  opacity: 0;
+  pointer-events: none;
+  z-index: 12;
+  transition: opacity .18s ease, transform .18s ease;
+}
+
+/* Заголовок и текст */
+#pano .rb-card-title{
+  font-weight: 700;
+  font-size: 13px;
+  line-height: 1.25;
+  margin-bottom: 4px;
+  letter-spacing: .2px;
+}
+#pano .rb-card-text{
+  font-weight: 500;
+  opacity: .85;
+}
+
+/* Появление по hover/focus/тапу */
+#pano .rb-spot:hover .rb-card,
+#pano .rb-spot:focus-visible .rb-card,
+#pano .rb-spot.is-open .rb-card{
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(-50%) translateZ(0) scale(1);
+}
+
+/* Карточка для полигона — ставим сверху слева, чтобы не перекрывалась */
+#pano .rb-card--area{
+  left: 12px;
+  top: -12px;
+  transform: translateY(-100%) translateZ(0) scale(.98);
+}
+#pano .rb-area-wrap:hover .rb-card--area,
+#pano .rb-area-wrap:focus-visible .rb-card--area,
+#pano .rb-area-wrap.is-open .rb-card--area{
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(-100%) translateZ(0) scale(1);
+}
+
+/* Пин — как был, можно чуть усилить контраст */
+#pano .rb-spot .rb-pin{
+  display:block; width:14px; height:14px; border-radius:9999px;
+  background:#a3e635;
+  box-shadow:0 0 0 2px #fff, 0 8px 18px rgba(0,0,0,.25);
+  transition:transform .16s ease-out;
+}
+#pano .rb-spot:hover .rb-pin,
+#pano .rb-spot:focus-visible .rb-pin{ transform:scale(1.15); }
+
+/* Полигон как был */
+#pano .rb-area-wrap{ position:absolute; outline:none; z-index: 11; }
+#pano .rb-area{
+  position:relative;
+  width:220px; height:140px;
+  background:rgba(163,230,53,.18);
+  border:2px solid rgba(163,230,53,.6);
+  clip-path:polygon(8% 12%, 95% 6%, 88% 85%, 14% 92%);
+  border-radius:10px;
+  transition:background-color .2s ease, filter .2s ease, transform .2s ease;
+  filter:saturate(.9);
+}
+#pano .rb-area-wrap:hover .rb-area,
+#pano .rb-area-wrap:focus-visible .rb-area{
+  background:rgba(163,230,53,.26);
+  filter:saturate(1);
+}
+
+/* На маленьких экранах карточки компактнее */
+@media (max-width: 480px){
+  #pano .rb-card{
+    max-width: 72vw;
+    padding: 9px 10px;
+    border-radius: 12px;
+  }
+  #pano .rb-card-title{ font-size: 12px; }
+  #pano .rb-card-text{ font-size: 11px; }
+}
+
+</style>
+
+
+
+
+
+
+
+    </section>
+
+
+
+
+
+    <style>
+      .ss-btn {
+        @apply w-11 h-11 rounded-full bg-white/80 text-black shadow ring-1 ring-black/10 backdrop-blur flex items-center justify-center transition;
+      }
+
+      .ss-btn:hover {
+        @apply bg-white;
+      }
+
+      .ss-btn:active {
+        transform: scale(.96);
+      }
+
+      .ss-btn:focus-visible {
+        @apply ring-2 ring-lime-400 outline-none;
+      }
+
+
+      /* настраиваемая длительность */
+      .ss-btn {
+        --morph-dur: 2.6s;
+        animation: ss-morph var(--morph-dur) ease-in-out infinite;
+        will-change: border-radius, transform;
+      }
+
+      /* пауза на взаимодействии (по желанию — можно убрать) */
+      .ss-btn:hover,
+      .ss-btn:focus-visible {
+        animation-play-state: paused;
+      }
+
+      /* морфинг формы: круг → чуть сплюснутые/органические формы → круг */
+      @keyframes ss-morph {
+
+        0%,
+        60%,
+        100% {
+          border-radius: 50%;
+          transform: scale(1);
+        }
+
+        12% {
+          /* горизонтальное “сжатие” */
+          border-radius: 46% 54% 54% 46% / 58% 58% 42% 42%;
+          transform: scale(1.08, 0.92);
+        }
+
+        24% {
+          /* вертикальная отдача */
+          border-radius: 56% 44% 44% 56% / 42% 58% 58% 42%;
+          transform: scale(0.94, 1.07);
+        }
+
+        36% {
+          /* мягкая стабилизация */
+          border-radius: 50% 50% 48% 52% / 48% 52% 50% 50%;
+          transform: scale(1.02, 0.98);
+        }
+
+        48% {
+          border-radius: 50%;
+          transform: scale(1);
+        }
+      }
+
+      /* уважение к reduced motion */
+      @media (prefers-reduced-motion: reduce) {
+        .ss-btn {
+          animation: none !important;
+        }
+      }
+    </style>
+
+    <script>
+      const ssSlides = [
+        {
+          title: "ГАСТРОНОМИЧЕСКИЙ\nБРЕНДИНГ",
+          text: "Брендинг играет решающую роль в сфере общественного питания… уютное кафе или модное бистро.",
+          img: "https://img.freepik.com/free-photo/restaurant-hall-with-lots-table_140725-6309.jpg?w=1480&q=80",
+          link: "https://mo-grajdanka.github.io/RentEstate-v4/pages/list.html?purpose=production&minArea=250&maxArea=1000"
+        },
+        {
+          title: "РИТЕЙЛ-\nБРЕНДИНГ",
+          text: "Айдентика, навигация и мерчандайзинг формируют восприятие магазина и повышают конверсию.",
+          img: "https://media.kf.expert/lenta_gallery/10/10000/ee21251417d342bc95f57fec1276a691.jpg",
+          link: "https://mo-grajdanka.github.io/RentEstate-v4/pages/list.html?purpose=retail&minArea=50&maxArea=200"
+        },
+        {
+          title: "ЗЕМЕЛЬНЫЕ\nУЧАСТКИ",
+          text: "Подбираем земельные участки для строительства, инвестиций и коммерческого использования. Помогаем на всех этапах — от анализа и проверки документов до сопровождения сделки.",
+          img: "https://img.freepik.com/free-photo/view-city-with-apartment-buildings-green-vegetation_23-2150439367.jpg",
+          link: "https://mo-grajdanka.github.io/RentEstate-v4/pages/list.html?purpose=land&minArea=30&maxArea=350"
+        },
+      ];
+
+      (function () {
+        const track = document.getElementById('ssTrack');
+        let i = 0, w = 0;
+
+        const slideTpl = s => `
+  <article class="shrink-0 w-full">
+    <div class="grid md:grid-cols-2 items-stretch">
+      <div class="bg-lime-400 text-black p-6 sm:p-10 md:p-14 flex flex-col justify-center h-full">
+        <div class="text-black/80 mb-4">Специализация:</div>
+        <h3 class="font-extrabold leading-[0.95] tracking-tight whitespace-pre-line
+                   text-4xl sm:text-5xl md:text-6xl lg:text-7xl mb-6">${s.title}</h3>
+        <p class="text-base sm:text-lg md:text-xl text-black/80 max-w-2xl">${s.text}</p>
+
+        <div class="mt-7">
+          <a href="${s.link || '#'}"
+   class="btn-shine inline-flex items-center gap-2 px-6 py-3 rounded-full
+          bg-black text-white font-medium
+          ring-2 ring-black/80 shadow-[inset_0_0_0_2px_rgba(255,255,255,.2)]
+          transition hover:bg-transparent hover:text-black
+          hover:shadow-[inset_0_0_0_2px_rgba(0,0,0,.85)]
+          focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-black/20">
+  Подобрать
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+    <path d="M8 12h8M12 8l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+</a>
+        </div>
+      </div>
+
+      <div class="relative h-full min-h-[320px] md:min-h-[520px] lg:min-h-[560px]">
+        <img src="${s.img}" alt="" class="absolute inset-0 w-full h-full object-cover"
+             onerror="this.src='https://placehold.co/1200x800?text=Image'">
+      </div>
+    </div>
+  </article>`;
+
+        // Рендер
+        track.innerHTML = ssSlides.map(slideTpl).join('');
+
+        function resize() {
+          // ширина видимой области слайдера
+          w = track.parentElement.clientWidth;
+          // ширина полотна
+          track.style.width = (ssSlides.length * 100) + '%';
+          // фиксируем ширину каждого слайда
+          track.querySelectorAll('article').forEach(el => { el.style.width = w + 'px'; });
+          go(i, true);
+        }
+
+        function go(n, noAnim) {
+          i = (n + ssSlides.length) % ssSlides.length;
+          if (noAnim) track.style.transition = 'none';
+          track.style.transform = `translateX(-${i * w}px)`;
+          requestAnimationFrame(() => { track.style.transition = 'transform .5s ease-out'; });
+        }
+
+        // Кнопки
+        document.getElementById('ssPrev').onclick = () => go(i - 1);
+        document.getElementById('ssNext').onclick = () => go(i + 1);
+
+        // Свайп
+        let x0 = null;
+        track.addEventListener('pointerdown', e => x0 = e.clientX, { passive: true });
+        window.addEventListener('pointerup', e => {
+          if (x0 == null) return;
+          const dx = e.clientX - x0;
+          if (Math.abs(dx) > 40) (dx < 0) ? go(i + 1) : go(i - 1);
+          x0 = null;
+        }, { passive: true });
+
+        // Автопрокрутки НЕТ — никаких setInterval
+        window.addEventListener('resize', resize);
+        resize();
+      })();
+
+      setInterval(() => {
+  document.querySelectorAll('.btn-shine').forEach(btn => {
+    btn.classList.remove('animate'); // сброс
+    void btn.offsetWidth;            // форсируем reflow
+    btn.classList.add('animate');    // запуск анимации
+  });
+}, 2500); // каждые 2.5 сек
+
+    </script>
+<style>
+.btn-shine {
+  position: relative;
+  overflow: hidden;
+}
+.btn-shine::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -75%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(120deg, transparent, rgba(255,255,255,0.6), transparent);
+  transform: skewX(-20deg);
+  opacity: 0;
+  pointer-events: none;       /* <-- чтобы клики проходили к ссылке */
+  will-change: transform, left, opacity;
+}
+.btn-shine.animate::before {
+  animation: shine 1.2s forwards;
+  opacity: 1;
+}
+@keyframes shine {
+  0%   { left: -75%; opacity: 1; }
+  60%  { left: 125%; opacity: 1; }
+  100% { left: 125%; opacity: 0; }
+}
+
+
+</style>
+
+    <!-- ============================================================================================================================================================== -->
+
+
+    <!-- ===== NEWS / НОВОСТИ ===== -->
+<section id="news" class="relative w-screen bg-black text-white">
+  <div class="mx-auto max-w-6xl px-6 py-20 md:py-28">
+    <!-- Заголовок: красится и масштабируется при скролле -->
+    <h2 id="newsTitle"
+        data-scale-on-scroll data-scale-max="0.12"
+        class="text-center font-extrabold leading-[0.9] tracking-tight
+               text-[clamp(40px,16vw,144px)]">
+      <span class="paint-word block"
+            data-paint-trigger="#news"
+            style="--paint:#a3e635; --base:#fff; --p:0%;
+                   background-image:linear-gradient(90deg,var(--paint) var(--p), var(--base) var(--p));
+                   -webkit-background-clip:text; background-clip:text; color:transparent;">
+        НОВОСТИ
+      </span>
+    </h2>
+
+    <!-- Карточки -->
+    <div class="mt-12 grid gap-8 sm:gap-10 md:grid-cols-2 lg:grid-cols-3">
+      <!-- Card 1 -->
+      <article class="group ring-1 ring-white/10 hover:ring-white/30 transition overflow-hidden flex flex-col">
+        <a href="#" class="relative block aspect-[16/10] overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1516259762381-22954d7d3ad2?q=80&w=1200&auto=format&fit=crop"
+               alt="ORF1: Разговор о соблазнении в ритейле"
+               class="absolute inset-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-[1.03]">
+        </a>
+        <div class="p-6 flex flex-col grow">
+          <div class="text-white/60 text-sm">15 янв · 1&nbsp;мин. чтения</div>
+          <h3 class="mt-3 text-xl font-semibold leading-snug transition group-hover:text-lime-400">
+            Арндт Трайндль на ORF1: о «соблазнении» в розничной торговле
+          </h3>
+          <p class="mt-3 text-white/70">
+            Документальный фильм «DOK 1: Чтобы покупали — трюки продавцов» раскрывает механики влияния мерчандайзинга и дизайна пространства.
+          </p>
+          <div class="mt-6 pt-4 border-t border-white/10 flex items-center justify-between text-sm text-white/60">
+            <span class="inline-flex items-center gap-2">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M1.5 12s4-7.5 10.5-7.5S22.5 12 22.5 12s-4 7.5-10.5 7.5S1.5 12 1.5 12Z" stroke="currentColor"/><circle cx="12" cy="12" r="3.25" stroke="currentColor"/></svg>
+              16
+            </span>
+            <span class="inline-flex items-center gap-2">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" class="text-white/40 group-hover:text-lime-400 transition"><path d="M12.1 21.35 10 19.45C5.4 15.36 2 12.28 2 8.5A4.5 4.5 0 0 1 6.5 4c1.74 0 3.41.81 4.5 2.09A6 6 0 0 1 12 6c1.09-1.28 2.76-2.09 4.5-2.09A4.5 4.5 0 0 1 21 8.5c0 3.78-3.4 6.86-8 10.95l-.9.9Z"/></svg>
+              2
+            </span>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 2 -->
+      <article class="group ring-1 ring-white/10 hover:ring-white/30 transition overflow-hidden flex flex-col">
+        <a href="#" class="relative block aspect-[16/10] overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?q=80&w=1200&auto=format&fit=crop"
+               alt="Запуск новой версии сайта"
+               class="absolute inset-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-[1.03]">
+        </a>
+        <div class="p-6 flex flex-col grow">
+          <div class="text-white/60 text-sm">4 окт. 2024 · 2&nbsp;мин. чтения</div>
+          <h3 class="mt-3 text-xl font-semibold leading-snug transition group-hover:text-lime-400">
+            Новый сайт: быстрее, светлее, удобнее
+          </h3>
+          <p class="mt-3 text-white/70">
+            Представили обновлённый сайт retail branding — акценты на кейсах, услугах и удобной навигации с мобильных.
+          </p>
+          <div class="mt-6 pt-4 border-t border-white/10 flex items-center justify-between text-sm text-white/60">
+            <span class="inline-flex items-center gap-2">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M1.5 12s4-7.5 10.5-7.5S22.5 12 22.5 12s-4 7.5-10.5 7.5S1.5 12 1.5 12Z" stroke="currentColor"/><circle cx="12" cy="12" r="3.25" stroke="currentColor"/></svg>
+              15
+            </span>
+            <span class="inline-flex items-center gap-2">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" class="text-white/40 group-hover:text-lime-400 transition"><path d="M12.1 21.35 10 19.45C5.4 15.36 2 12.28 2 8.5A4.5 4.5 0 0 1 6.5 4c1.74 0 3.41.81 4.5 2.09A6 6 0 0 1 12 6c1.09-1.28 2.76-2.09 4.5-2.09A4.5 4.5 0 0 1 21 8.5c0 3.78-3.4 6.86-8 10.95l-.9.9Z"/></svg>
+              2
+            </span>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 3 -->
+      <article class="group ring-1 ring-white/10 hover:ring-white/30 transition overflow-hidden flex flex-col">
+        <a href="#" class="relative block aspect-[16/10] overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1557800636-894a64c1696f?q=80&w=1200&auto=format&fit=crop"
+               alt="retail branding на EuroShop"
+               class="absolute inset-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-[1.03]">
+        </a>
+        <div class="p-6 flex flex-col grow">
+          <div class="text-white/60 text-sm">3 окт. 2024 · 1&nbsp;мин. чтения</div>
+          <h3 class="mt-3 text-xl font-semibold leading-snug transition group-hover:text-lime-400">
+            retail branding и 3D Betondruck Solutions на EuroShop, Дюссельдорф
+          </h3>
+          <p class="mt-3 text-white/70">
+            На крупнейшей выставке оформления магазинов представили впечатляющие решения в области 3D-печатных конструкций и дизайна зон.
+          </p>
+          <div class="mt-6 pt-4 border-t border-white/10 flex items-center justify-between text-sm text-white/60">
+            <span class="inline-flex items-center gap-2">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M1.5 12s4-7.5 10.5-7.5S22.5 12 22.5 12s-4 7.5-10.5 7.5S1.5 12 1.5 12Z" stroke="currentColor"/><circle cx="12" cy="12" r="3.25" stroke="currentColor"/></svg>
+              12
+            </span>
+            <span class="inline-flex items-center gap-2">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" class="text-white/40 group-hover:text-lime-400 transition"><path d="M12.1 21.35 10 19.45C5.4 15.36 2 12.28 2 8.5A4.5 4.5 0 0 1 6.5 4c1.74 0 3.41.81 4.5 2.09A6 6 0 0 1 12 6c1.09-1.28 2.76-2.09 4.5-2.09A4.5 4.5 0 0 1 21 8.5c0 3.78-3.4 6.86-8 10.95l-.9.9Z"/></svg>
+              2
+            </span>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+
+
+
+    <section id="about" class="p-8">
+<!-- ===== ФУТЕР ===== -->
+<footer id="siteFooter" class="relative bg-white text-black">
+  <!-- верхняя линия на всю ширину + центральная риска -->
+  <div class="relative mx-[calc(50%-50vw)] border-t border-black/20
+              before:content-[''] before:absolute before:left-1/2 before:-translate-x-1/2
+              before:-top-[9px] before:h-4 before:w-px before:bg-black/60"></div>
+
+  <div class="mx-auto max-w-5xl px-4 pt-8 md:pt-12 pb-0">
+    <div class="grid gap-6 md:grid-cols-[1fr_auto_1fr]">
+      <!-- ЛЕВО: логотип + контакты -->
+      <div>
+        <img src="https://logo.svgcdn.com/l/jruby.svg" alt="retail|branding" class="h-8 mb-6">
+        <p class="mb-3">Адрес: </p>
+        <p class="leading-relaxed">
+          Адрес 8<br>3300 Улица<br> Санкт-Петербург
+        </p>
+
+        <div class="mt-4">
+          <p class="mb-1">WhatsApp / Телефон:</p>
+          <a href="tel:+436643832481" class="underline-offset-4 hover:underline">
+            +43 (0) 664 383 24 81
+          </a>
+        </div>
+
+        <div class="mt-4">
+          <a href="mailto:office@retailbranding.at"
+             class="underline underline-offset-4 decoration-transparent hover:decoration-current">
+            office@retailbranding.at
+          </a>
+        </div>
+      </div>
+
+      <!-- ЦЕНТР: навигация -->
+      <nav class="text-lg md:text-xl" aria-label="Навигация по сайту">
+        <ul class="space-y-2">
+          <li><a href="#home" class="text-lime-500 font-medium">ГЛАВНАЯ</a></li>
+          <li><a href="#services" class="hover:text-lime-600 transition">УСЛУГИ</a></li>
+          <li><a href="#references" class="hover:text-lime-600 transition">РЕФЕРЕНЦИИ</a></li>
+          <li><a href="#about" class="hover:text-lime-600 transition">О&nbsp;НАС</a></li>
+        </ul>
+      </nav>
+
+      <!-- ПРАВО: юр. ссылки -->
+      <div class="md:text-right">
+        <ul class="space-y-2 text-lg md:text-xl">
+          <li><a href="/datenschutz" class="hover:text-lime-600 transition">Политика конфиденциальности</a></li>
+          <li><a href="/impressum"  class="hover:text-lime-600 transition">Импрессум</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- нижняя строка -->
+    <div class="mt-12 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 text-sm text-black/60">
+      <p>© <span id="year"></span> retail|branding. Все права защищены.</p>
+      <div class="flex items-center gap-4">
+        <a href="mailto:office@retailbranding.at" class="hover:text-black">Связаться</a>
+        <a href="#" class="hover:text-black">LinkedIn</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // текущий год в копирайте
+  (document.getElementById('year')||{}).textContent = new Date().getFullYear();
+</script>
+
+    </section>
+  </div>
+
+  <!-- логика открытия/закрытия меню -->
+  <script>
+    const burgerBtn = document.getElementById('burger');
+    const closeBtn = document.getElementById('closeMenu');
+    const overlay = document.getElementById('overlay');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const wrapper = document.getElementById('siteWrapper');
+
+    function openMenu() {
+      overlay.classList.remove('hidden');      // затемнение + blur
+      wrapper.classList.add('blur-sm');
+      mobileMenu.classList.remove('translate-x-full'); // выезжает справа
+      burgerBtn.classList.add('hidden');
+    }
+
+    function closeMenu() {
+      overlay.classList.add('hidden');
+      wrapper.classList.remove('blur-sm');
+      mobileMenu.classList.add('translate-x-full');
+      burgerBtn.classList.remove('hidden');
+    }
+
+    burgerBtn.addEventListener('click', openMenu);
+    closeBtn.addEventListener('click', closeMenu);
+    overlay.addEventListener('click', closeMenu);
+
+    // Аккордеон
+    (function () {
+      const toggles = document.querySelectorAll('#mobileMenu .accordion-toggle');
+      toggles.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const panel = btn.nextElementSibling;
+          const chev = btn.querySelector('.chev');
+          const isOpen = !panel.classList.contains('hidden');
+
+          // закрыть остальные
+          document.querySelectorAll('#mobileMenu .accordion-panel').forEach(p => {
+            if (p !== panel) p.classList.add('hidden');
+          });
+          document.querySelectorAll('#mobileMenu .chev').forEach(c => {
+            if (c !== chev) c.style.transform = 'rotate(0deg)';
+          });
+
+          panel.classList.toggle('hidden');
+          chev.style.transform = isOpen ? 'rotate(0deg)' : 'rotate(180deg)';
+        });
+      });
+
+      // закрываем меню по клику на ссылку внутри
+      document.querySelectorAll('#mobileMenu a[href^="#"]').forEach(a => {
+        a.addEventListener('click', () => closeMenu());
+      });
+    })();
+
+
+
+    (() => {
+      const header = document.querySelector('header');
+      const hero = document.getElementById('home');
+      const heroTitle = document.getElementById('heroTitle');
+
+      let lastY = window.scrollY;
+      let ticking = false;
+
+      const clamp = (n, a, b) => Math.min(b, Math.max(a, n));
+
+      function setupPaintWords({
+        selector = '.paint-word',
+        defaultStart = 80,
+        defaultEnd = 20
+      } = {}) {
+        const els = Array.from(document.querySelectorAll(selector));
+        if (!els.length) return () => { };
+
+        const groups = new Map(); // key -> { items:[], triggerEl, start,end }
+        for (const el of els) {
+          const key = el.dataset.paintGroup || Symbol();
+          const start = Number(el.dataset.paintStart ?? defaultStart);
+          const end = Number(el.dataset.paintEnd ?? defaultEnd);
+          const trigSel = el.dataset.paintTrigger;
+          const triggerEl = trigSel ? document.querySelector(trigSel) : el;
+
+          if (!groups.has(key)) groups.set(key, { items: [], triggerEl, start, end });
+          const g = groups.get(key);
+
+          if (trigSel && !g.triggerCustom) { g.triggerEl = triggerEl; g.triggerCustom = true; }
+          if (!g._startSet) { g.start = start; g._startSet = true; }
+          if (!g._endSet) { g.end = end; g._endSet = true; }
+
+          g.items.push(el);
+        }
+
+        function updatePaint() {
+          const vh = window.innerHeight;
+          groups.forEach(g => {
+            const rect = g.triggerEl.getBoundingClientRect();
+            const startPx = (g.start / 100) * vh;
+            const endPx = (g.end / 100) * vh;
+            const t = (startPx - rect.top) / (startPx - endPx);  // 0..1
+            const p = clamp(t, 0, 1);
+            const perc = (p * 100).toFixed(2) + '%';
+            g.items.forEach(el => el.style.setProperty('--p', perc));
+          });
+        }
+
+        return updatePaint; // вернём функцию для вызова из onScroll
+      }
+
+      const updatePaint = setupPaintWords(); 
+
+      function onScroll() {
+        const y = window.scrollY;
+        const delta = y - lastY;              // +вниз / -вверх
+        const dirUp = delta < 0;
+
+        // 1) Прогресс по высоте hero (0..1)
+        const heroH = (hero?.offsetHeight) || window.innerHeight;
+        const p = clamp(y / heroH, 0, 1);
+
+        // 2) Анимация заголовка в hero
+        if (heroTitle) {
+          const scale = 1 - 0.3 * p;        // 1 → 0.7
+          const shiftY = -20 * p;            // 0 → -20px
+          const opacity = 1 - 0.5 * p;        // 1 → 0.5
+          heroTitle.style.transform = `translateY(${shiftY}px) scale(${scale})`;
+          heroTitle.style.opacity = String(opacity);
+        }
+
+        // 3) Прозрачность/поведение хедера
+        if (header) {
+          const baseAlpha = clamp(0.9 - 0.7 * p, 0.2, 0.9); // 0.9→0.2
+          const alpha = dirUp ? Math.max(baseAlpha, 0.6) : baseAlpha;
+          header.style.backgroundColor = `rgba(255,255,255,${alpha})`;
+          header.style.backdropFilter = alpha > 0.2 ? 'saturate(150%) blur(6px)' : 'none';
+
+          if (!dirUp && y > 80) {
+            header.style.opacity = '0';
+            header.style.transform = 'translateY(-100%)';
+            header.style.pointerEvents = 'none';
+          } else {
+            header.style.opacity = '1';
+            header.style.transform = 'translateY(0)';
+            header.style.pointerEvents = 'auto';
+          }
+        }
+
+        // 4) Обновить все .paint-word
+        updatePaint();
+
+        lastY = y;
+        ticking = false;
+      }
+
+      const schedule = () => {
+        if (!ticking) { requestAnimationFrame(onScroll); ticking = true; }
+      };
+
+      window.addEventListener('scroll', schedule, { passive: true });
+      window.addEventListener('resize', schedule, { passive: true });
+
+      // первичный рендер
+      onScroll();
+    })();
+  </script>
+
+<!-- Modal -->
+<div id="svcModal" class="fixed inset-0 z-[70] hidden">
+  <!-- затемнение + блюр -->
+  <div id="svcOverlay" class="absolute inset-0 bg-black/70 backdrop-blur-sm"></div>
+
+  <!-- большой белый ореол -->
+  <div id="svcBlurBg" class="absolute inset-0 grid place-items-center pointer-events-none">
+    <div class="w-[94vw] max-w-[1400px] h-[90vh] 
+                bg-white/20 blur-3xl rounded-[40px]"></div>
+  </div>
+
+  <!-- диалог -->
+  <div class="relative h-full grid place-items-center p-4 pointer-events-none">
+      <div class="relative w-full max-w-3xl rounded-2xl bg-black text-white
+              ring-1 ring-white/15 shadow-[0_0_0_14px_rgba(255,255,255,0.08)]
+              overflow-hidden z-10 pointer-events-auto">
+      <button id="svcClose"
+              class="absolute top-4 right-4 text-3xl leading-none transition hover:rotate-180"
+              aria-label="Закрыть">✕</button>
+
+      <div class="px-10 pt-12 pb-12 text-center">
+        <div id="svcIcon" class="mx-auto mb-6"></div>
+        <h3 id="svcTitle" class="text-2xl font-bold text-lime-400 leading-tight mb-8"></h3>
+
+        <!-- КНОПКА -->
+        <a id="svcBtn" href="#"
+           class="inline-block px-6 py-2.5 rounded-full
+                  bg-lime-400 text-black font-medium
+                  ring-2 ring-lime-400
+                  shadow-[inset_0_0_0_2px_rgba(0,0,0,.55)]
+                  transition
+                  hover:bg-transparent hover:text-white
+                  hover:shadow-[inset_0_0_0_2px_rgba(255,255,255,.85)]
+                  hover:ring-2 hover:ring-white">
+          Ваше персональное предложение
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<script>
+(() => {
+  const row      = document.getElementById('servicesRow');
+  const modal    = document.getElementById('svcModal');
+  const overlay  = document.getElementById('svcOverlay');
+  const btnClose = document.getElementById('svcClose');
+  const boxIcon  = document.getElementById('svcIcon');
+  const boxTitle = document.getElementById('svcTitle');
+  document.getElementById('svcOverlay').addEventListener('click', closeModal);
+document.getElementById('svcBlurBg').addEventListener('click', closeModal);
+  let lastFocused = null;
+
+  function openFor(item) {
+    // берём svg и title из самой карточки
+    const svgEl   = item.querySelector('svg');
+    const titleEl = item.querySelector('div');
+
+    // вставляем SVG (слегка увеличим и подсветим)
+    boxIcon.innerHTML = svgEl ? svgEl.outerHTML : '';
+    const injected = boxIcon.querySelector('svg');
+    if (injected) {
+      injected.classList.remove('w-16','h-16','text-white/70');
+      injected.classList.add('w-20','h-20','text-lime-400');
+    }
+
+    // переносим заголовок (сохраняем <br>)
+    boxTitle.innerHTML = titleEl ? titleEl.innerHTML : '';
+
+    // показать модалку
+    lastFocused = document.activeElement;
+    document.body.style.overflow = 'hidden';
+    modal.classList.remove('hidden');
+    btnClose.focus();
+  }
+
+  function closeModal() {
+    modal.classList.add('hidden');
+    document.body.style.overflow = '';
+    if (lastFocused) lastFocused.focus();
+  }
+
+  // делегирование клика по карточкам
+  row?.addEventListener('click', (e) => {
+    const item = e.target.closest('.serviceItem');
+    if (!item) return;
+    openFor(item);
+  });
+
+  // закрытие
+  overlay.addEventListener('click', closeModal);
+  btnClose.addEventListener('click', closeModal);
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !modal.classList.contains('hidden')) closeModal();
+  });
+})();
+</script>
+
+
+<script>
+(function(){
+  const DEFAULT_MAX = 0.12; // +12%
+
+  const headers = Array.from(document.querySelectorAll('[data-scale-on-scroll]'))
+    .map(el => ({
+      el,
+      section: document.querySelector(el.dataset.scaleTrigger) || el.closest('section') || document.body,
+      max: parseFloat(el.dataset.scaleMax) || DEFAULT_MAX
+    }));
+
+  if (!headers.length) return;
+
+  const clamp = (n,a,b)=>Math.min(b,Math.max(a,n));
+  let raf=null;
+
+  function update(){
+    const vh = window.innerHeight;
+    headers.forEach(({el, section, max})=>{
+      const rect = section.getBoundingClientRect();
+      const progress = clamp(1 - rect.top / vh, 0, 1);
+      el.style.transform = `scale(${1 + progress * max})`;
+    });
+    raf=null;
+  }
+  function onScroll(){ if(!raf) raf=requestAnimationFrame(update); }
+
+  window.addEventListener('scroll', onScroll, {passive:true});
+  window.addEventListener('resize', onScroll, {passive:true});
+  update();
+})();
+</script>
+
+
+</body>
+
+</html>
