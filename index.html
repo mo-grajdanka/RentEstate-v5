@@ -1193,10 +1193,84 @@ document.addEventListener('DOMContentLoaded', function () {
     console.log('yaw:', viewer.getYaw().toFixed(1),
                 'pitch:', viewer.getPitch().toFixed(1));
   });
+
+
+  el.classList.add('is-locked');
+
+  const overlay = document.createElement('div');
+  overlay.className = 'pano-lock-overlay';
+  overlay.innerHTML = '<h3>Нажмите для просмотра</h3>';
+  overlay.setAttribute('role','button');
+  overlay.setAttribute('tabindex','0');
+  overlay.setAttribute('aria-label','Нажмите для просмотра панорамы');
+  el.appendChild(overlay);
+
+  // разблокировка по клику/Enter/Space
+  const unlock = () => {
+    overlay.classList.add('is-hidden');
+    // чуть позже убираем блокировку и удаляем оверлей
+    setTimeout(() => {
+      el.classList.remove('is-locked');
+      overlay.remove();
+    }, 220);
+  };
+
+  overlay.addEventListener('click', unlock);
+  overlay.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); unlock(); }
+  });
+
 });
 </script>
 
 <style>
+/* стартовая блокировка панорамы */
+#pano.is-locked {
+  position: relative;
+}
+
+/* затемняющий оверлей с текстом */
+#pano .pano-lock-overlay{
+  position: absolute; inset: 0;
+  display: grid; place-items: center;
+  background: rgba(0,0,0,.48);
+  color: #fff;
+  z-index: 50;
+  cursor: pointer;
+  opacity: 1;
+  transition: opacity .25s ease, backdrop-filter .3s ease, background .3s ease;
+  backdrop-filter: none; 
+}
+
+#pano .pano-lock-overlay h3{
+  font: 800 clamp(22px, 4.5vw, 42px)/1.2 Poppins, system-ui;
+  text-align: center;
+  text-shadow: 0 2px 10px rgba(0,0,0,.35);
+  padding: 0 1rem;
+}
+
+#pano .pano-lock-overlay:hover{
+  backdrop-filter: blur(4px) saturate(120%);
+  background: rgba(0,0,0,.58);
+}
+
+/* пока заблокировано — не пропускаем события внутрь вьюера */
+#pano.is-locked .pnlm-container,
+#pano.is-locked canvas,
+#pano.is-locked .pnlm-ui {
+  pointer-events: none;
+  filter: brightness(.85);
+}
+
+/* плавное скрытие оверлея */
+#pano .pano-lock-overlay.is-hidden{ opacity: 0; pointer-events: none; }
+
+/* уважение к reduced motion */
+@media (prefers-reduced-motion: reduce){
+  #pano .pano-lock-overlay{ transition: none; }
+}
+
+
   /* Базовый контейнер хотспота — уже есть */
 #pano .rb-spot{ position:absolute; cursor:pointer; outline:none; }
 
@@ -2011,6 +2085,5 @@ document.getElementById('svcBlurBg').addEventListener('click', closeModal);
 
 
 </body>
-
 
 </html>
